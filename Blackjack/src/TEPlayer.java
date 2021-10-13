@@ -29,4 +29,11 @@ public class TEPlayer extends Player{
     @Override
     public void doubleUp() {
     }
+
+    // remove all the cards in a hand
+    public void cleanHand() {
+        this.hand = new ArrayList<Hand>();
+        this.hand.add(new Hand());
+        this.fold = false;
+    }
 }

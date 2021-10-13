@@ -45,7 +45,7 @@ public class TERunner extends Runner {
     public boolean each_round() {
         round += 1;
         System.out.printf("--- Starting round %d ---\n",round);
-        // remove all the cards in a hand
+        // remove all the cards in a hand/ initialize the player and the dealer
         dealer.cleanHand();
         for (TEPlayer player: players){
             player.cleanHand();
