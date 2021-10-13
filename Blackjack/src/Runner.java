@@ -1,17 +1,18 @@
 import java.util.ArrayList;
 import java.util.Scanner;
 
+// run the whole process of the game
 public abstract class Runner {
-    public ArrayList<TEPlayer> players;
-    public TEDealer dealer;
-    public static Scanner scan = new Scanner(System.in);
-    public int round;
-    public Deck deck;
+    public ArrayList<TEPlayer> players;                      // all the players in a game
+    public TEDealer dealer;                                  // the dealer
+    public static Scanner scan = new Scanner(System.in);     // scan the input
+    protected int round;                                     // record the round number
+    public Deck deck;                                        // the deck of the game
 
     // play the game
     public abstract void play();
 
-    // prepartaion
+    // preparation
     public abstract void start();
 
     // each round

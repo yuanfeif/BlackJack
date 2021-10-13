@@ -3,9 +3,9 @@ import java.util.Scanner;
 
 // Select the game
 public class Game {
-    private static Scanner scan = new Scanner(System.in);
+    private static Scanner scan = new Scanner(System.in);  // scan the input
 
-    private TERunner runner2; // Trianta runner
+    private TERunner runner2;                              // Trianta runner
 
     // constructor
     public Game(){
@@ -19,9 +19,12 @@ public class Game {
             int type = Welcome();
 
             // judge to enter which game
+            // if it is blackjack
             if (type == 1){
 
+            // if it is trianta ena
             }else{
+                runner2 = new TERunner();
                 runner2.play();
                 break;
             }

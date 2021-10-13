@@ -1,9 +1,11 @@
 public class TEDealer extends Dealer{
 
+    // constructor
     public TEDealer(int id, String name, int balance){
         super(id,name,balance);
     }
 
+    // deal cards to players
     @Override
     public void deal(Player player, Hand hand, boolean known, Deck deck) {
         Card card = deck.getCard();
@@ -14,9 +16,10 @@ public class TEDealer extends Dealer{
             System.out.printf("Player %s get a face up card.\n",player.getName());
         }
         hand.addCard(card);
-        System.out.printf("Player %s: %s",player.getName(),player.showhands());
+        System.out.printf("Player %s: %s\n",player.getName(),player.showhands());
     }
 
+    // deal cards to the dealer
     public void deal_dealer(Dealer dealer,Hand hand,boolean known, Deck deck){
         Card card = deck.getCard();
         if (!known){
@@ -26,19 +29,18 @@ public class TEDealer extends Dealer{
             System.out.printf("Dealer %s get a face up card.\n",dealer.getName());
         }
         hand.addCard(card);
-        System.out.printf("Dealer %s: %s",dealer.getName(),dealer.showhands());
+        System.out.printf("Dealer %s: %s\n",dealer.getName(),dealer.showhands());
     }
 
     @Override
-    public void hit(Dealer dealer,Hand hand,boolean known, Deck deck) {
-        deal_dealer(dealer,hand,known,deck);
+    public void hit() {
+        System.out.printf("Dealer %s hits!\n",this.getName());
     }
 
     @Override
-    public void turnFace() {
-        for (Card card: Dhand){
-                card.setKnown(true);
-            }
-        }
+    public Card turnFace() {
+        return null;
     }
+
+
 }

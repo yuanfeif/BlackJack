@@ -3,12 +3,12 @@ import java.util.ArrayList;
 public abstract class Player{
     protected int id;                   // Player's id
     protected String name;              // Player's name
-    protected int balance;              // Player's money
-    protected int bet;   // Player's bet in each round
+    public int balance;              // Player's money
+    public int bet;   // Player's bet in each round
     public ArrayList<Hand> hand;                // Player's hand card in each round
+    public boolean bust=false;                // whether the player busts
 
-    public Player(){}
-
+    // constructor
     public Player(int id, String name, int balance){
         this.id = id;
         this.name = name;
@@ -17,55 +17,46 @@ public abstract class Player{
         this.hand.add(new Hand());
     }
 
+    // return the Id
     public int getId(){
         return id;
     }
 
+    // set the Id
     public void setId(int id){
         this.id = id;
     }
 
+    // return the name
     public String getName(){
         return name;
     }
 
+    // set the name
     public void setName(String name){
         this.name = name;
     }
 
-    public int getBalance(){
-        return balance;
-    }
-
-    public void setBalance(int balance){
-        this.balance = balance;
-    }
-
-    public int getBet(){
-        return bet;
-    }
-
-    public void setBet(int bet){
-        this.bet = bet;
-    }
-
+    // return the hand
     public ArrayList<Hand> getHand(){
         return hand;
     }
 
+    // remove all the cards in a hand
     public void cleanHand() {
         this.hand = new ArrayList<Hand>();
         this.hand.add(new Hand());
     }
 
-    public abstract void bet(Player player, int money);           // Players can make a bet
+    public abstract void bet(int[] bets);           // Players can make a bet
 
-    public abstract void hit(Dealer dealer, Player player, Hand hand, boolean known, Deck deck);                     // Player can choose to hit
+    public abstract void hit(Deck deck);                     // Player can choose to hit
 
     public abstract void stand();                   // Player can choose to stand
 
-    public abstract void doubleUp(Dealer dealer, Player player, Hand hand, boolean known, Deck deck);                // Player can choose to double up
+    public abstract void doubleUp();                // Player can choose to double up
 
+    // convert all the cards in a hand to string
     public String showhands(){
         String str = "";
         for (Hand h: hand){

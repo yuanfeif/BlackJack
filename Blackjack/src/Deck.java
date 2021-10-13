@@ -14,6 +14,7 @@ public class Deck{
                 cards.add(new Card(i,j));
             }
         }
+        // shuffle the cards
         Collections.shuffle(cards);
     }
 
@@ -21,10 +22,16 @@ public class Deck{
         return cards;
     }
 
+    // draw a card from the deck
     public Card getCard(){
+        // if all the cards are used, shuffle it
+        if (cards.size() == 0){
+            shuffle();
+        }
         return cards.remove(0);
     }
 
+    //shuffle the card
     public void shuffle(){
         cards.clear();
         for (int i = 1; i < 14; i++){
