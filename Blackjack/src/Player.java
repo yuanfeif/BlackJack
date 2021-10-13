@@ -58,13 +58,13 @@ public abstract class Player{
         this.hand.add(new Hand());
     }
 
-    public abstract void bet(int[] bets);           // Players can make a bet
+    public abstract void bet(Player player, int money);           // Players can make a bet
 
-    public abstract void hit();                     // Player can choose to hit
+    public abstract void hit(Dealer dealer, Player player, Hand hand, boolean known, Deck deck);                     // Player can choose to hit
 
     public abstract void stand();                   // Player can choose to stand
 
-    public abstract void doubleUp();                // Player can choose to double up
+    public abstract void doubleUp(Dealer dealer, Player player, Hand hand, boolean known, Deck deck);                // Player can choose to double up
 
     public String showhands(){
         String str = "";

@@ -30,14 +30,15 @@ public class TEDealer extends Dealer{
     }
 
     @Override
-    public void hit() {
-
+    public void hit(Dealer dealer,Hand hand,boolean known, Deck deck) {
+        deal_dealer(dealer,hand,known,deck);
     }
 
     @Override
-    public Card turnFace() {
-        return null;
+    public void turnFace() {
+        for (Card card: Dhand){
+                card.setKnown(true);
+            }
+        }
     }
-
-
 }

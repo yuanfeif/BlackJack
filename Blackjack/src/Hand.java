@@ -4,10 +4,14 @@ public class Hand{
     public static int MAX_HV;               // The maximum of the hand value
     private ArrayList<Card> cards;          // The cards consisting of the hand
     private boolean isBusted;               // Whether the hand is busted
+    private boolean isBusted;               // Whether the hand is busted
+    private boolean isSplit;                // Whether the hand is splitable
 
     public Hand() {
         this.cards = new ArrayList<Card>();
         this.isBusted = false;
+        this.isBJ = false;
+        this.isSplit = false;
     }
 
     public static void setMax(int max){
@@ -19,11 +23,18 @@ public class Hand{
     }
 
     public boolean getIsBusted(){
+        setIsBusted();
         return this.isBusted;
     }
 
-    public void setIsBusted(){
-        isBusted = true;
+    public boolean getIsBJ(){
+        setIsBJ();
+        return this.isBJ;
+    }
+
+    public boolean getIsSplit(){
+        setIsSplit();
+        return this.isSplit;
     }
 
     public void addCard(Card card){
@@ -50,6 +61,24 @@ public class Hand{
         }
 
         return handValue;
+    }
+
+    public void setIsBusted(){
+        if (getIsBusted() > MAX_HV) {
+            isBusted = true;
+        }
+    }
+
+    public void setIsBJ(){
+        if (hand.size() == 2 && getHandValue() == MAX_HV){
+            this.isBJ = true;
+        }
+    }
+
+    public void setIsSplit(){
+        if (hand.size() == 2 && hand.getCard()[0] == hand.getCard()[1]){
+            this.isSplit = true;
+        }
     }
 
     public int getHandSize(){

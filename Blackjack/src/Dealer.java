@@ -4,6 +4,7 @@ public abstract class Dealer{
     protected int Dbalance;              // Dealer's money
     protected Hand Dhand;                // Dealer's hand card in each round
     protected Deck deck;                 // Dealer holds the deck of cards
+    protected int Dbet;                  // Dealer's bet in each round
 
     public Dealer(){}
 
@@ -55,9 +56,17 @@ public abstract class Dealer{
 
     public abstract void deal_dealer(Dealer dealer,Hand hand,boolean known, Deck deck);
 
-    public abstract void hit();             // Dealer can automatically hit
+    public int getBet(){
+        return Dbet;
+    }
 
-    public abstract Card turnFace();        // Dealer can turn the face-down card up
+    public void setBet(int bet){
+        this.bet = bet;
+    }
+
+    public abstract void hit(Dealer dealer,Hand hand,boolean known, Deck deck);             // Dealer can automatically hit
+
+    public abstract void turnFace();        // Dealer can turn the face-down card up
 
     public String showhands(){
         String str = "";
