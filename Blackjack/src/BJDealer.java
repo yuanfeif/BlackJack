@@ -9,6 +9,14 @@ public class BJDealer extends Dealer {
         super(id, name, balance);
     }
 
+    /**
+     * @Description BlackJack dealer deals cards to the player
+     * @param player
+     * @param hand
+     * @param known
+     * @param deck
+     * @Return void
+     */
     @Override
     public void deal(Player player, Hand hand, boolean known, Deck deck) {
         Card card = deck.getCard();
@@ -21,6 +29,14 @@ public class BJDealer extends Dealer {
         hand.addCard(card);
     }
 
+    /**
+     * @Description BlackJack dealer deals cards to himself
+     * @param dealer
+     * @param hand
+     * @param known
+     * @param deck
+     * @Return void
+     */
     @Override
     public void dealToDealer(Dealer dealer, Hand hand, boolean known, Deck deck) {
         Card card = deck.getCard();

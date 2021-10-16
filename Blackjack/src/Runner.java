@@ -7,13 +7,25 @@ public abstract class Runner {
     protected int round;                                     // record the round number
     public Deck deck;                                        // the deck of the game
 
-    // play the game
+    /**
+     * @Description: This method runs a game
+     * @Param: None
+     * @Return: void
+     */
     public abstract void play();
 
-    // preparation
+    /**
+     * @Description: This method is the preparation of a game
+     * @Param: None
+     * @Return: void
+     */
     public abstract void start();
 
-    // each round
+    /**
+     * @Description: This method represents each round of a game.
+     * @Param: None
+     * @Return: void
+     */
     public abstract boolean eachRound();
 
     /**
@@ -23,5 +35,11 @@ public abstract class Runner {
      */
     public abstract void createPlayers();
 
+
+    /**
+     * @Description: This method shows the final result including balance of each player.
+     * @Param: None
+     * @Return: void
+     */
     public abstract void showBalance();
 }
