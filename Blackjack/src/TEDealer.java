@@ -36,9 +36,8 @@ public class TEDealer extends Dealer{
 
     @Override
     public void turnFace() {
-        for (Card card: Dhand){
-                card.setKnown(true);
-            }
+        for (Card card: Dhand.getCard()){
+            card.setKnown(true);
         }
     }
 }

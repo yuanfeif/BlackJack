@@ -4,7 +4,7 @@ public class Hand{
     public static int MAX_HV;               // The maximum of the hand value
     private ArrayList<Card> cards;          // The cards consisting of the hand
     private boolean isBusted;               // Whether the hand is busted
-    private boolean isBusted;               // Whether the hand is busted
+    private boolean isBJ;               // Whether the hand is busted
     private boolean isSplit;                // Whether the hand is splitable
 
     public Hand() {
@@ -64,19 +64,19 @@ public class Hand{
     }
 
     public void setIsBusted(){
-        if (getIsBusted() > MAX_HV) {
-            isBusted = true;
+        if (getHandValue() > MAX_HV) {
+            this.isBusted = true;
         }
     }
 
     public void setIsBJ(){
-        if (hand.size() == 2 && getHandValue() == MAX_HV){
+        if (getCard().size() == 2 && getHandValue() == MAX_HV){
             this.isBJ = true;
         }
     }
 
     public void setIsSplit(){
-        if (hand.size() == 2 && hand.getCard()[0] == hand.getCard()[1]){
+        if (getCard().size() == 2 && getCard().get(0) == getCard().get(1)){
             this.isSplit = true;
         }
     }

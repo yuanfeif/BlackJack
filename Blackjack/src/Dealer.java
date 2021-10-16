@@ -61,7 +61,7 @@ public abstract class Dealer{
     }
 
     public void setBet(int bet){
-        this.bet = bet;
+        this.Dbet = bet;
     }
 
     public abstract void hit(Dealer dealer,Hand hand,boolean known, Deck deck);             // Dealer can automatically hit

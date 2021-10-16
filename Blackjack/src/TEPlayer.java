@@ -3,7 +3,7 @@ import java.util.Scanner;
 
 public class TEPlayer extends Player{
     public boolean fold = false;
-    scan = new Scanner(System.in);
+    private Scanner scan = new Scanner(System.in);
 
     public TEPlayer(int id, String name, int balance){
         super(id,name,balance);
@@ -21,12 +21,12 @@ public class TEPlayer extends Player{
             try{
                 money = Integer.parseInt(betting);
             } catch (Exception e){
-                System.out.println("Invalid betting. Bet must be an integer.")
+                System.out.println("Invalid betting. Bet must be an integer.");
                 continue;
             }
             if (money <= 0 || money > balance){
                 System.out.println("Invalid betting. Must between 0 to balance");
-                continue;;
+                continue;
             }
             break;
         }
