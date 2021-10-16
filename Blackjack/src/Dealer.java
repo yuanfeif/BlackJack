@@ -1,4 +1,4 @@
-public abstract class Dealer{
+public abstract class Dealer {
     protected int Did;                   // Dealer's id
     protected String Dname;              // Dealer's name
     public int Dbalance;              // Dealer's money
@@ -6,7 +6,7 @@ public abstract class Dealer{
     protected Deck deck;                 // Dealer holds the deck of cards
 
     // constructor
-    public Dealer(int id, String name, int balance){
+    public Dealer(int id, String name, int balance) {
         this.Did = id;
         this.Dname = name;
         this.Dbalance = balance;
@@ -15,37 +15,37 @@ public abstract class Dealer{
     }
 
     // get the id
-    public int getId(){
+    public int getId() {
         return Did;
     }
 
     // set the id
-    public void setId(int id){
+    public void setId(int id) {
         this.Did = id;
     }
 
     // get the name
-    public String getName(){
+    public String getName() {
         return Dname;
     }
 
     // set the name
-    public void setName(String name){
+    public void setName(String name) {
         this.Dname = name;
     }
 
     // get the balance
-    public int getBalance(){
+    public int getBalance() {
         return Dbalance;
     }
 
     // set the balance
-    public void setBalance(int balance){
+    public void setBalance(int balance) {
         this.Dbalance = balance;
     }
 
     // get the hand
-    public Hand getHand(){
+    public Hand getHand() {
         return Dhand;
     }
 
@@ -55,7 +55,7 @@ public abstract class Dealer{
     }
 
     // return the deck
-    public Deck getDeck(){
+    public Deck getDeck() {
         return deck;
     }
 
@@ -63,17 +63,17 @@ public abstract class Dealer{
     public abstract void deal(Player player, Hand hand, boolean known, Deck deck);            // Dealer can deal cards to all gamblers
 
     // deal the cards to the dealer
-    public abstract void deal_dealer(Dealer dealer,Hand hand,boolean known, Deck deck);
+    public abstract void dealToDealer(Dealer dealer, Hand hand, boolean known, Deck deck);
 
     public abstract void hit();             // Dealer can automatically hit
 
     public abstract Card turnFace();        // Dealer can turn the face-down card up
 
     // return the string of all the cards in a hand
-    public String showhands(){
+    public String showhands() {
         String str = "";
         str += Dhand.toString();
-        return str+"\n";
+        return str + "\n";
     }
 
 
