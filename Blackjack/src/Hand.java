@@ -95,7 +95,7 @@ public class Hand {
     public void setIsStand() {
         isStand = true;
     }
-
+  
     // get the number of cards in a hand
     public int getHandSize() {
         return cards.size();
@@ -117,7 +117,6 @@ public class Hand {
             // If it is J,Q,K, the value is 10
             if (card.getValue() >= 11 && card.getValue() <= 13) {
                 handValue += 10;
-
                 // If it is A, the player has to choose the value
             } else if (card.getValue() == 1) {
                 hasAce = true;
@@ -129,7 +128,6 @@ public class Hand {
                         Ace = true;
                     }
                 }
-
                 // Otherwise, the face value is itself
             } else {
                 handValue += card.getValue();
@@ -143,7 +141,6 @@ public class Hand {
 
         return handValue;
     }
-
 
     /**
      * calculate the sum of the card value in a hand in the blackjack game
@@ -162,12 +159,10 @@ public class Hand {
             // If it is J,Q,K, the value is 10
             if (card.getValue() >= 11 && card.getValue() <= 13) {
                 result += 10;
-
                 // If it is A, the value is 11
             } else if (card.getValue() == 1) {
                 result += 11;
                 numOfA++;
-
                 // Otherwise, the face value is itself
             } else {
                 result += card.getValue();

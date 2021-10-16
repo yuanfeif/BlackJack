@@ -12,7 +12,6 @@
 import java.util.*;
 
 public class Deck {
-
     /**
      * Use an arraylist to store a deck of cards
      */
@@ -36,7 +35,7 @@ public class Deck {
     public ArrayList<Card> getDeck() {
         return cards;
     }
-
+  
     /**
      * Draw a card from the deck
      */

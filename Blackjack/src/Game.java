@@ -1,5 +1,6 @@
 import java.util.Random;
 import java.util.Scanner;
+
 /**
  * @ClassName Game
  * @Description It is the class for the game entrance and selector
@@ -29,6 +30,7 @@ public class Game {
         runner2 = new TERunner();
     }
 
+
     /**
      * Users select the game at the very beginning.
      */
@@ -42,7 +44,6 @@ public class Game {
             if (type == 1) {
                 runner1.play();
                 break;
-
                 // if it is trianta ena
             } else {
                 runner2 = new TERunner();

@@ -88,7 +88,6 @@ public class TERunner extends Runner {
         for (TEPlayer player : players) {
             player.cleanHand();
         }
-
         // dealer starts to deal cards
         deal();
 
@@ -203,7 +202,6 @@ public class TERunner extends Runner {
 
         // deal the first card to the dealer
         dealer.dealToDealer(dealer, dealer.getHand(), true, deck);
-
         // check whether the player wants to fold or bet
         for (TEPlayer player : players) {
             bet_fold(player);
@@ -242,7 +240,6 @@ public class TERunner extends Runner {
             player.fold = true;
         }
     }
-
 
     /**
      * This mothod is in charge of player's action in their turn.

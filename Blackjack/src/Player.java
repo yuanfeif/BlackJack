@@ -67,7 +67,6 @@ public abstract class Player {
         return hand;
     }
 
-
     /**
      * @Description: This method removes all the cards in a player's hand
      * @Param: none

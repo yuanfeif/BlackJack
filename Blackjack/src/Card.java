@@ -62,7 +62,7 @@ public class Card {
     public void setKnown(boolean known) {
         this.known = known;
     }
-
+  
     // Override toString() method to print the card
     public String toString() {
         return suits[suit - 1] + Integer.toString(value);
