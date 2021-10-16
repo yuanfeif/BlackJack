@@ -1,0 +1,66 @@
+import java.util.ArrayList;
+import java.util.Scanner;
+
+/**
+ * @ClassName BJPlayer
+ * @Description
+ * @Author Vincent Yuan
+ * @Date 2021/10/14 21:15
+ */
+public class BJPlayer extends Player {
+
+
+    public BJPlayer(int id, String name, int balance) {
+        super(id, name, balance);
+    }
+
+    @Override
+    public void bet(Hand curHand) {
+        System.out.println("How much do you want to bet?");
+        Scanner in = new Scanner(System.in);
+        int betInput = in.nextInt();
+        while (betInput < 0 || betInput > balance) {
+            System.out.println("Bet should be greater than 0 and smaller than your balance!");
+            betInput = in.nextInt();
+        }
+        curHand.setBet(betInput);
+        balance -= curHand.getBet();
+    }
+
+    @Override
+    public void hit(Dealer dealer, Deck deck, Hand curHand) {
+        dealer.deal(this, curHand, true, deck);
+    }
+
+    @Override
+    public void stand(Hand hand) {
+        System.out.println("Player " + name + " choose to stand!");
+        hand.setIsStand();
+    }
+
+    @Override
+    public void doubleUp(Hand curHand) {
+        int bet = curHand.getBet();
+        if (balance < bet) {
+            System.out.println("Sorry, you do not have enough money to double up!");
+        } else {
+            balance -= bet;
+            curHand.setBet(2 * bet);
+        }
+    }
+
+    public void split(Dealer dealer, Deck deck, Hand curHand) {
+
+        Hand newHand = new Hand();
+        newHand.addCard(curHand.getCard().get(1));
+        newHand.setBet(curHand.getBet());
+
+        curHand.getCard().remove(1);
+
+        newHand.addCard(deck.getCard());
+        curHand.addCard(deck.getCard());
+
+        hand.add(newHand);
+    }
+
+}

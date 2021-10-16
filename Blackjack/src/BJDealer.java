@@ -1,11 +1,14 @@
-public class TEDealer extends Dealer {
-
-    // constructor
-    public TEDealer(int id, String name, int balance) {
+/**
+ * @ClassName BJDealer
+ * @Description
+ * @Author Vincent Yuan
+ * @Date 2021/10/14 21:15
+ */
+public class BJDealer extends Dealer {
+    public BJDealer(int id, String name, int balance) {
         super(id, name, balance);
     }
 
-    // deal cards to players
     @Override
     public void deal(Player player, Hand hand, boolean known, Deck deck) {
         Card card = deck.getCard();
@@ -13,35 +16,30 @@ public class TEDealer extends Dealer {
             card.setKnown(false);
             System.out.printf("Player %s get a face down card.\n", player.getName());
         } else {
-            System.out.printf("Player %s get a face up card.\n", player.getName());
+            System.out.printf("Player %s get a face up card. The card is: " + card.toString() + "\n", player.getName());
         }
         hand.addCard(card);
-        System.out.printf("Player %s: %s\n", player.getName(), player.showhands());
     }
 
-    // deal cards to the dealer
     @Override
     public void dealToDealer(Dealer dealer, Hand hand, boolean known, Deck deck) {
         Card card = deck.getCard();
         if (!known) {
             card.setKnown(false);
-            System.out.printf("Dealer %s get a face down card.\n", dealer.getName());
+            System.out.println("Dealer gets a face down card.");
         } else {
-            System.out.printf("Dealer %s get a face up card.\n", dealer.getName());
+            System.out.println("Dealer gets a face up card. The card is: " + card.toString());
         }
         hand.addCard(card);
-        System.out.printf("Dealer %s: %s\n", dealer.getName(), dealer.showhands());
     }
 
     @Override
     public void hit() {
-        System.out.printf("Dealer %s hits!\n", this.getName());
+
     }
 
     @Override
     public Card turnFace() {
         return null;
     }
-
-
 }
