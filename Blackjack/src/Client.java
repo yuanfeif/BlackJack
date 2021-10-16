@@ -1,14 +1,26 @@
 import java.util.ArrayList;
 import java.util.Comparator;
 
-// client used to judge who is the winner and distribute the money
+/**
+ * @ClassName Client
+ * @Description It is the client used to judge who is the winner and distribute the money.
+ * @Author Peter Guo
+ * @Date 2021/10/13
+ */
 public abstract class Client implements Comparator<Hand> {
-    // check who wins
-//    public abstract void checkWin(TEDealer dealer, ArrayList<TEPlayer> players);
+
+    /**
+     * @Description: This method checks if there is a winner.
+     * @Param: Dealer dealer, ArrayList<? extends Player> players
+     * @Return: void
+     */
     public abstract void checkWin(Dealer dealer, ArrayList<? extends Player> players);
 
-
-    // compare two hands
+    /**
+     * @Description: This method compares the two hands by overriding the compare() method.
+     * @Param: Hand h1, Hand h2
+     * @Return: int
+     */
     @Override
     public int compare(Hand h1, Hand h2) {
         // they are not the same value

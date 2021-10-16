@@ -1,15 +1,47 @@
 import java.util.ArrayList;
 import java.util.Scanner;
 
+/**
+ * @ClassName Hand
+ * @Description This class is in charge of the hand of players
+ * @Author Andy Sheng
+ * @Date 2021/10/12
+ */
 public class Hand {
-    public static int MAX_HV;               // The maximum of the hand value
-    private ArrayList<Card> cards;          // The cards consisting of the hand
-    private int bet;                        // Every hand has a bet
-    private boolean isBusted;               // Whether the hand is busted
-    public boolean Ace = false;             // Whether there is an Ace is count as 1
-    public boolean hasAce = false;          // Whether there is an Ace
 
+    /**
+     * The maximum of the hand value
+     */
+    public static int MAX_HV;
 
+    /**
+     * The cards consisting of the hand
+     */
+    private ArrayList<Card> cards;
+
+    /**
+     * Every hand is along with a bet
+     */
+    private int bet;
+
+    /**
+     * Whether the hand is busted
+     */
+    private boolean isBusted;
+
+    /**
+     * Whether there is an Ace is count as 1
+     */
+    public boolean Ace = false;
+
+    /**
+     * Whether there is an Ace
+     */
+    public boolean hasAce = false;
+
+    /**
+     * Whether the game is a draw
+     */
     private boolean isStand;
 
     // constructor
@@ -29,10 +61,12 @@ public class Hand {
         return cards;
     }
 
+    // get the bet of the hand
     public int getBet() {
         return bet;
     }
 
+    // set the bet of the hand
     public void setBet(int bet) {
         this.bet = bet;
     }
@@ -52,25 +86,38 @@ public class Hand {
         cards.add(card);
     }
 
+    // check if the player stands
     public boolean getIsStand() {
         return isStand;
     }
 
+    // set the player to stand
     public void setIsStand() {
         isStand = true;
     }
+  
+    // get the number of cards in a hand
+    public int getHandSize() {
+        return cards.size();
+    }
 
-    // calculate the sum of the card value in a hand
+    /**
+     * Calculate the sum of the card value in a hand.
+     */
     public int getHandValue() {
         Scanner scan = new Scanner(System.in);
+
+        // Player chooses to count Ace as 1(1) or 11(0)
         int ans = -1;
+
+        // Record the face value of the hand
         int handValue = 0;
-        // for each card
+
         for (Card card : cards) {
-            // if it is J,Q,K, the value is 10
+            // If it is J,Q,K, the value is 10
             if (card.getValue() >= 11 && card.getValue() <= 13) {
                 handValue += 10;
-                // if it is A, the player has to choose the value
+                // If it is A, the player has to choose the value
             } else if (card.getValue() == 1) {
                 hasAce = true;
                 handValue += 11;
@@ -81,12 +128,13 @@ public class Hand {
                         Ace = true;
                     }
                 }
-                // otherwise, the face value is itself
+                // Otherwise, the face value is itself
             } else {
                 handValue += card.getValue();
             }
         }
 
+        // If the Ace is counted as 1
         if (Ace) {
             handValue -= 10;
         }
@@ -94,20 +142,34 @@ public class Hand {
         return handValue;
     }
 
+    /**
+     * calculate the sum of the card value in a hand in the blackjack game
+     */
     public int getBJHandValue() {
+        // Set the maximum value of a hand as 21
         setMax(21);
+
+        // The value of the hand
         int result = 0;
+
+        // The number of Ace in the hand
         int numOfA = 0;
+
         for (Card card : cards) {
+            // If it is J,Q,K, the value is 10
             if (card.getValue() >= 11 && card.getValue() <= 13) {
                 result += 10;
+                // If it is A, the value is 11
             } else if (card.getValue() == 1) {
                 result += 11;
                 numOfA++;
+                // Otherwise, the face value is itself
             } else {
                 result += card.getValue();
             }
         }
+
+        // When counting Ace as 11 leads to a bust, transfer Ace to 1
         while (result > MAX_HV && numOfA > 0) {
             result -= 10;
             numOfA--;
@@ -115,12 +177,9 @@ public class Hand {
         return result;
     }
 
-    // get the number of cards in a hand
-    public int getHandSize() {
-        return cards.size();
-    }
-
-    // convert all the cards in a hand to string
+    /**
+     * Override the toString() method to convert all the cards in a hand to string
+     */
     public String toString() {
         String str = "[";
         for (Card card : cards) {
@@ -129,6 +188,9 @@ public class Hand {
         return str + "]";
     }
 
+    /**
+     * Check whether the hand can be splited
+     */
     public boolean canBeSplited() {
         return (cards.size() == 2) && (cards.get(0).getValue() == cards.get(1).getValue());
     }

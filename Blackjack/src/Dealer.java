@@ -1,9 +1,35 @@
+/**
+ * @ClassName Dealer
+ * @Description It is the abstract class for the game dealer
+ * @Author Andy Sheng
+ * @Date 2021/10/12
+ */
+
 public abstract class Dealer {
-    protected int Did;                   // Dealer's id
-    protected String Dname;              // Dealer's name
-    public int Dbalance;              // Dealer's money
-    protected Hand Dhand;                // Dealer's hand card in each round
-    protected Deck deck;                 // Dealer holds the deck of cards
+    /**
+     * Dealer's id
+     */
+    protected int Did;
+
+    /**
+     * Dealer's name
+     */
+    protected String Dname;
+
+    /**
+     * Dealer's money
+     */
+    public int Dbalance;
+
+    /**
+     * Dealer's hand card in each round
+     */
+    protected Hand Dhand;
+
+    /**
+     * Dealer holds the deck of cards
+     */
+    protected Deck deck;
 
     // constructor
     public Dealer(int id, String name, int balance) {
@@ -61,38 +87,42 @@ public abstract class Dealer {
 
 
     /**
-     * @Description Dealer deals cards to the player
-     * @param player
-     * @param hand
-     * @param known
-     * @param deck
-     * @Return void
+     * @Description: This method deals the cards to a player.
+     * @Param: Player player, Hand hand, boolean known, Deck deck
+     * @Return: void
      */
-    public abstract void deal(Player player, Hand hand, boolean known, Deck deck);            // Dealer can deal cards to all gamblers
-
-    // deal the cards to the dealer
+    public abstract void deal(Player player, Hand hand, boolean known, Deck deck);
 
     /**
-     * @Description Dealer deals cards to himself
-     * @param dealer
-     * @param hand
-     * @param known
-     * @param deck
-     * @Return void
+     * @Description: This method deals the cards to the dealer.
+     * @Param: Dealer dealer, Hand hand, boolean known, Deck deck
+     * @Return: void
      */
     public abstract void dealToDealer(Dealer dealer, Hand hand, boolean known, Deck deck);
 
-    public abstract void hit();             // Dealer can automatically hit
+    /**
+     * @Description: The dealer can hit automatically.
+     * @Param: none
+     * @Return: void
+     */
+    public abstract void hit();
 
-    public abstract Card turnFace();        // Dealer can turn the face-down card up
+    /**
+     * @Description: Dealer can turn the face-down card up.
+     * @Param: none
+     * @Return: Card
+     */
+    public abstract Card turnFace();
 
-    // return the string of all the cards in a hand
+    /**
+     * @Description: Override toString() method to print the string of all the cards in a hand.
+     * @Param: none
+     * @Return: String
+     */
     public String showhands() {
         String str = "";
         str += Dhand.toString();
         return str + "\n";
     }
-
-
 }
 

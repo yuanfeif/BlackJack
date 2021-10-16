@@ -1,11 +1,37 @@
 import java.util.ArrayList;
+/**
+ * @ClassName Player
+ * @Description It is the abstract class for the game player
+ * @Author Andy Sheng
+ * @Date 2021/10/12
+ */
 
 public abstract class Player {
-    protected int id;                   // Player's id
-    protected String name;              // Player's name
-    public int balance;              // Player's money
-    public ArrayList<Hand> hand;                // Player's hand card in each round
-    public boolean bust = false;                // whether the player busts
+
+    /**
+     * Player's id
+     */
+    protected int id;
+
+    /**
+     * Player's name
+     */
+    protected String name;
+
+    /**
+     * Player's id
+     */
+    public int balance;
+
+    /**
+     * Player's money
+     */
+    public ArrayList<Hand> hand;
+
+    /**
+     * Whether the player busts
+     */
+    public boolean bust = false;
 
     // constructor
     public Player(int id, String name, int balance) {
@@ -41,46 +67,48 @@ public abstract class Player {
         return hand;
     }
 
-    // remove all the cards in a hand
+    /**
+     * @Description: This method removes all the cards in a player's hand
+     * @Param: none
+     * @Return: void
+     */
     public void cleanHand() {
         this.hand = new ArrayList<Hand>();
         this.hand.add(new Hand());
     }
 
     /**
-     * @Description Players can make a bet
-     * @param curHand
-     * @Return void
+     * @Description: This method makes a bet in each round.
+     * @Param: Hand curhand
+     * @Return: void
      */
     public abstract void bet(Hand curHand);
 
     /**
-     * @Description Players can choose to hit
-     * @param dealer
-     * @param deck
-     * @param curHand
-     * @Return void
+     * @Description: Player can choose to hit.
+     * @Param: Dealer dealer, Deck deck, Hand curHand
+     * @Return: void
      */
     public abstract void hit(Dealer dealer, Deck deck, Hand curHand);
 
     /**
-     * @Description Players can stand
-     * @param curHand
-     * @Return void
+     * @Description: Player can choose to stand.
+     * @Param: Hand curHand
+     * @Return: void
      */
     public abstract void stand(Hand curHand);
 
     /**
-     * @Description Players can choose to double up
-     * @param curHand
-     * @Return void
+     * @Description: Player can choose to double up.
+     * @Param: Hand curHand
+     * @Return: void
      */
-    public abstract void doubleUp(Hand curHand);                // Player can choose to double up
+    public abstract void doubleUp(Hand curHand);
 
     /**
-     * @Description convert all the cards in a hand to a string
-     * @Param None
-     * @return void
+     * @Description: Show all the cards in a player's hand by toString().
+     * @Param: none
+     * @Return: String
      */
     public String showhands() {
         String str = "";

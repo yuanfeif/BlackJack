@@ -1,11 +1,28 @@
 import java.util.ArrayList;
 import java.util.Scanner;
 
-// run the whole process of the game
+/**
+ * @ClassName Runner
+ * @Description It is the abstract class running the whole process of the game.
+ * @Author Peter Guo
+ * @Date 2021/10/13
+ */
 public abstract class Runner {
-    public static Scanner scan = new Scanner(System.in);     // scan the input
-    protected int round;                                     // record the round number
-    public Deck deck;                                        // the deck of the game
+
+    /**
+     * Scanner to scan the input
+     */
+    public static Scanner scan = new Scanner(System.in);
+
+    /**
+     * The round counter
+     */
+    protected int round;
+
+    /**
+     * The deck of cards
+     */
+    public Deck deck;
 
     /**
      * @Description: This method runs a game

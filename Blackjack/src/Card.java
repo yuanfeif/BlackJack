@@ -1,9 +1,31 @@
-// the card in the game
+/**
+ * @ClassName Card
+ * @Description This class is in charge of game cards
+ * @Author Andy Sheng
+ * @Date 2021/10/12
+ */
+
 public class Card {
-    private int value;              // The face value of the card
-    private int suit;               // The suit of the card
-    private boolean known = true;   // The card is public(1) or private(0)
-    private String[] suits = {"spade", "heart", "club", "diamond"}; // used for toString
+
+    /**
+     * The face value of the card
+     */
+    private int value;
+
+    /**
+     * The suit of the card
+     */
+    private int suit;
+
+    /**
+     * The card is public(1) or private(0)
+     */
+    private boolean known = true;
+
+    /**
+     * Used for toString method
+     */
+    private String[] suits = {"\033[10m\u2660\033[0m", "\033[31m\u2665\033[0m", "\033[10m\u2663\033[0m", "\033[31m\u2666\033[0m"};
 
     // constructor
     public Card(int value, int suit) {
@@ -40,8 +62,8 @@ public class Card {
     public void setKnown(boolean known) {
         this.known = known;
     }
-
-    /* Override toString() method to print the card */
+  
+    // Override toString() method to print the card
     public String toString() {
         return suits[suit - 1] + Integer.toString(value);
     }

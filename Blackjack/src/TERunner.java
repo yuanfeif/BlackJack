@@ -3,14 +3,38 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.Scanner;
 
-// runner for the trianta ena
+/**
+ * @ClassName TERunner
+ * @Description It is the class running the whole process of the game Trianta Ena.
+ * @Author Peter Guo
+ * @Date 2021/10/13
+ */
 public class TERunner extends Runner {
-    public static final int BET = 100;         // initial bet amount (3*BET for dealer)
-    public static final int MAX_VALUE = 31;    // maximum value to be not busted
-    public TEClient client;                    // client of the game
 
-    public ArrayList<TEPlayer> players;                      // all the players in a game
-    public TEDealer dealer;                                  // the dealer
+    /**
+     * Initial bet amount (3*BET for dealer)
+     */
+    public static final int BET = 100;
+
+    /**
+     * Maximum value of a hand without busted
+     */
+    public static final int MAX_VALUE = 31;
+
+    /**
+     * Client of the game
+     */
+    public TEClient client;
+
+    /**
+     * All the players in a game
+     */
+    public ArrayList<TEPlayer> players;
+
+    /**
+     * The dealer of a game
+     */
+    public TEDealer dealer;
 
     // constructor
     public TERunner() {
@@ -20,16 +44,21 @@ public class TERunner extends Runner {
         round = 0;
     }
 
-    // play the game
+    /**
+     * The main process of the game.
+     */
     @Override
     public void play() {
-        // preparation
+        // Start the game by showing the welcome message first
         start();
-        boolean end = false; // judge whether the game comes to an end
+
+        // Whether the game comes to an end
+        boolean end = false;
         while (true) {
-            // each round of the game
+            // Each round of the game
             end = eachRound();
-            // if there is someone out of money
+
+            // If there is someone out of money
             if (end) {
                 break;
             }
@@ -37,7 +66,9 @@ public class TERunner extends Runner {
 
     }
 
-    // prepartaion
+    /**
+     * Start the game by showing welcome message and generating players
+     */
     @Override
     public void start() {
         System.out.println("Welcome to the Trianta Ena Game!");
@@ -45,12 +76,14 @@ public class TERunner extends Runner {
         createPlayers();
     }
 
-    // each round of the game
+    /**
+     * This mothod is in charge of each round in a game.
+     */
     @Override
     public boolean eachRound() {
         round += 1;
         System.out.printf("--- Starting round %d ---\n", round);
-        // remove all the cards in a hand/ initialize the player and the dealer
+        // initialize the player and the dealer by clearing their cards
         dealer.cleanHand();
         for (TEPlayer player : players) {
             player.cleanHand();
@@ -65,13 +98,13 @@ public class TERunner extends Runner {
             }
         }
 
-        // dealer takes action
+        // dealer takes action afterwards
         try {
             Thread.sleep(5000);
-        } catch (Exception e) {
-        }
+        } catch (Exception e) {}
         System.out.printf("Dealer %s: %s\n", dealer.getName(), dealer.showhands());
-        // while the hand value is smaller than 27, hit!
+
+        // while the hand value is smaller than 27, hit automatically
         while (dealer.getHand().getHandValue() < 27) {
             dealer.hit();
             try {
@@ -88,7 +121,7 @@ public class TERunner extends Runner {
             }
         }
 
-        // sleep
+        // use sleep to make the information shown clearly
         try {
             Thread.sleep(5000);
         } catch (Exception e) {
@@ -108,7 +141,7 @@ public class TERunner extends Runner {
         // print the current
         showBalance();
 
-        // sleep
+        // use sleep to make the information shown clearly
         try {
             Thread.sleep(5000);
         } catch (Exception e) {
@@ -121,44 +154,53 @@ public class TERunner extends Runner {
             }
         }
 
+        // judge whether the dealer is out of money
         if (dealer.Dbalance <= 0) {
             return true;
         }
 
-        // change the banker
+        // change the banker if necessary at the end of each round
         change_dealer();
 
         return false;
     }
 
-    // create players
+    /**
+     * This mothod generates players.
+     */
     @Override
     public void createPlayers() {
-        // add the players
+        // set the number of players
         System.out.println("How many players do you want?");
         int player_num = scan.nextInt();
         String player_name;
+
+        // generate players with specific names
         for (int i = 1; i <= player_num; i++) {
             System.out.println("Enter the name of Player " + i);
             player_name = scan.next();
             players.add(new TEPlayer(i, player_name, BET));
         }
 
-        // add the dealer
+        // generate the dealer with name
         System.out.println("Who is the dealer?");
         player_name = scan.next();
         dealer = new TEDealer(player_num + 1, player_name, 3 * BET);
     }
 
-    // deal cards
+    /**
+     * This mothod deals cards to every players on the table.
+     */
     public void deal() {
-        // deal the first card
+        // dealer starts to deal the cards
         System.out.printf("%s is dealing cards...\n", dealer.getName());
-        // to players
+
+        // deal the first card to players
         for (Player player : players) {
             dealer.deal(player, player.hand.get(0), false, deck);
         }
-        // to the dealer
+
+        // deal the first card to the dealer
         dealer.dealToDealer(dealer, dealer.getHand(), true, deck);
         // check whether the player wants to fold or bet
         for (TEPlayer player : players) {
@@ -174,15 +216,18 @@ public class TERunner extends Runner {
         }
     }
 
-    // check whether bet or fold
+    /**
+     * This mothod is in charge of player betting/folding.
+     */
     void bet_fold(TEPlayer player) {
         System.out.printf("Player %s, Do you want to bet or fold?(0:fold, 1:bet)\n", player.getName());
         int ans = scan.nextInt();
-        // bet the money
+        // if chooses betting, set the money
         if (ans == 1) {
             System.out.println("How much do you want to bet?");
             while (true) {
                 ans = scan.nextInt();
+                // bet must between 0 and balance
                 if (ans > 0 && ans <= player.balance) {
                     player.hand.get(0).setBet(ans);
                     player.balance -= ans;
@@ -190,27 +235,32 @@ public class TERunner extends Runner {
                 }
                 System.out.println("Bet should be greater than 0 and smaller than your balance!");
             }
-            // fold
+            // fold is chosen
         } else {
             player.fold = true;
         }
     }
 
-    // player take their action
+    /**
+     * This mothod is in charge of player's action in their turn.
+     */
     public void playerturn(TEPlayer player) {
         while (true) {
             System.out.printf("Player %s: %s\n", player.getName(), player.showhands());
             System.out.printf("Player %s, which action do you want to take?(0:hit,1:stand)\n", player.getName());
             int ans = scan.nextInt();
-            // hit
+
+            // player chooses to hit
             if (ans == 0) {
                 player.hit(dealer, deck, player.hand.get(0));
                 dealer.deal(player, player.hand.get(0), true, deck);
-                // stand
+
+                // player chooses to stand
             } else {
                 player.stand(player.hand.get(0));
                 break;
             }
+
             // check whether the player is busted
             if (player.hand.get(0).getHandValue() > MAX_VALUE) {
                 player.hand.get(0).setIsBusted();
@@ -221,7 +271,9 @@ public class TERunner extends Runner {
         }
     }
 
-    // show the balance of players and the dealer
+    /**
+     * This mothod shows the balance of players and the dealer.
+     */
     @Override
     public void showBalance() {
         for (TEPlayer player : players) {
@@ -231,24 +283,29 @@ public class TERunner extends Runner {
         System.out.println();
     }
 
-    // change the banker if someone has the money exceeding that of the banker
+    /**
+     * This mothod is responsible for changing the banker if someone has the money exceeding that of the banker
+     */
     public void change_dealer() {
-        // a new copy of the players
+        // make a copy of the current players
         ArrayList<TEPlayer> new_players = new ArrayList<TEPlayer>();
         for (TEPlayer player : players) {
             new_players.add(player);
         }
-        // sort the new_players
+
+        // sort the new_players according to their balance
         Collections.sort(new_players, new playerComparator());
         for (TEPlayer player : new_players) {
             // if the balance is smaller than dealer
             if (player.balance <= dealer.Dbalance) {
                 break;
-                // if the balance is bigger than dealer, ask him
+
+                // if the balance is bigger than dealer, it can choose to be banker or not
             } else {
                 System.out.printf("Player %s has the cash amount exceeding that of the Banker %s\n", player.getName(), dealer.getName());
                 System.out.printf("Player %s, Do you want to be the banker?(0:no,1:yes)\n", player.getName());
                 int ans = scan.nextInt();
+                // if it wants to be the banker, do the switch
                 if (ans == 1) {
                     players.remove(player);
                     players.add(new TEPlayer(dealer.getId(), dealer.getName(), dealer.Dbalance));
@@ -259,7 +316,9 @@ public class TERunner extends Runner {
         }
     }
 
-    // a new comparator for comparing the player's balance
+    /**
+     * This mothod compares the balance of two players by overriding the compare() method
+     */
     public class playerComparator implements Comparator<TEPlayer> {
         @Override
         public int compare(TEPlayer p1, TEPlayer p2) {
