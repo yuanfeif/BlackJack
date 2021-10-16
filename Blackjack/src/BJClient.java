@@ -1,20 +1,33 @@
+import com.sun.istack.internal.NotNull;
+
 import java.util.ArrayList;
 
 /**
  * @ClassName BJClient
- * @Description
+ * @Description This class realizes winning condition of BlackJack Game.
  * @Author Vincent Yuan
  * @Date 2021/10/14 21:15
  */
 public class BJClient extends Client {
+
+    /**
+     * @Description This method checks who is the winner and calculate the balance of each player.
+     * @param dealer
+     * @param players
+     * @Return: void
+     */
     @Override
     public void checkWin(Dealer dealer, ArrayList<? extends Player> players) {
+
+        //final condition of the dealer
         boolean isDealerBlackJack = isBlackJack(dealer.getHand());
         boolean isDealerBust = dealer.getHand().getIsBusted();
         int dealerHandValue = 0;
         if (!isDealerBust) {
             dealerHandValue = dealer.getHand().getBJHandValue();
         }
+
+        //final condition of the player
         for (Player player : players) {
             BJPlayer tmpPlayer = (BJPlayer) player;
             for (Hand h : tmpPlayer.getHand()) {
@@ -45,6 +58,11 @@ public class BJClient extends Client {
         }
     }
 
+    /**
+     * @Description This method checks whether a hand is BlackJack.
+     * @param hand
+     * @return boolean
+     */
     public boolean isBlackJack(Hand hand) {
         return hand.getBJHandValue() == 21 && hand.getCard().size() == 2;
     }

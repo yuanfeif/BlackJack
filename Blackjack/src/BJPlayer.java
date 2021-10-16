@@ -3,7 +3,7 @@ import java.util.Scanner;
 
 /**
  * @ClassName BJPlayer
- * @Description
+ * @Description represents a special player called in BlackJack Game
  * @Author Vincent Yuan
  * @Date 2021/10/14 21:15
  */
@@ -14,6 +14,11 @@ public class BJPlayer extends Player {
         super(id, name, balance);
     }
 
+    /**
+     * @Description BlackJack Players can make a bet
+     * @param curHand
+     * @Return void
+     */
     @Override
     public void bet(Hand curHand) {
         System.out.println("How much do you want to bet?");
@@ -27,17 +32,34 @@ public class BJPlayer extends Player {
         balance -= curHand.getBet();
     }
 
+    /**
+     * @Description BlackJack Players can choose to hit
+     * @param dealer
+     * @param deck
+     * @param curHand
+     * @Return void
+     */
     @Override
     public void hit(Dealer dealer, Deck deck, Hand curHand) {
         dealer.deal(this, curHand, true, deck);
     }
 
+    /**
+     * @Description BlackJack Players can stand
+     * @param hand
+     * @Return void
+     */
     @Override
     public void stand(Hand hand) {
         System.out.println("Player " + name + " choose to stand!");
         hand.setIsStand();
     }
 
+    /**
+     * @Description BlackJack Players can choose to double up
+     * @param curHand
+     * @Return void
+     */
     @Override
     public void doubleUp(Hand curHand) {
         int bet = curHand.getBet();
@@ -49,6 +71,13 @@ public class BJPlayer extends Player {
         }
     }
 
+    /**
+     * @Description special operation of BlackJack game, a player can split a hand has two same cards
+     * @param dealer
+     * @param deck
+     * @param curHand
+     * @Return void
+     */
     public void split(Dealer dealer, Deck deck, Hand curHand) {
 
         Hand newHand = new Hand();

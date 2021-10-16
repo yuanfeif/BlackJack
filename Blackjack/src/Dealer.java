@@ -59,10 +59,27 @@ public abstract class Dealer {
         return deck;
     }
 
-    // deal the cards to the player
+
+    /**
+     * @Description Dealer deals cards to the player
+     * @param player
+     * @param hand
+     * @param known
+     * @param deck
+     * @Return void
+     */
     public abstract void deal(Player player, Hand hand, boolean known, Deck deck);            // Dealer can deal cards to all gamblers
 
     // deal the cards to the dealer
+
+    /**
+     * @Description Dealer deals cards to himself
+     * @param dealer
+     * @param hand
+     * @param known
+     * @param deck
+     * @Return void
+     */
     public abstract void dealToDealer(Dealer dealer, Hand hand, boolean known, Deck deck);
 
     public abstract void hit();             // Dealer can automatically hit

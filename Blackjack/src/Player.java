@@ -47,15 +47,41 @@ public abstract class Player {
         this.hand.add(new Hand());
     }
 
-    public abstract void bet(Hand curHand);           // Players can make a bet
+    /**
+     * @Description Players can make a bet
+     * @param curHand
+     * @Return void
+     */
+    public abstract void bet(Hand curHand);
 
-    public abstract void hit(Dealer dealer, Deck deck, Hand curHand);                     // Player can choose to hit
+    /**
+     * @Description Players can choose to hit
+     * @param dealer
+     * @param deck
+     * @param curHand
+     * @Return void
+     */
+    public abstract void hit(Dealer dealer, Deck deck, Hand curHand);
 
-    public abstract void stand(Hand curHand);                   // Player can choose to stand
+    /**
+     * @Description Players can stand
+     * @param curHand
+     * @Return void
+     */
+    public abstract void stand(Hand curHand);
 
+    /**
+     * @Description Players can choose to double up
+     * @param curHand
+     * @Return void
+     */
     public abstract void doubleUp(Hand curHand);                // Player can choose to double up
 
-    // convert all the cards in a hand to
+    /**
+     * @Description convert all the cards in a hand to a string
+     * @Param None
+     * @return void
+     */
     public String showhands() {
         String str = "";
         for (Hand h : hand) {

@@ -3,7 +3,7 @@ import java.util.Scanner;
 
 /**
  * @ClassName BJRunner
- * @Description This class runs the BlackJack game
+ * @Description This class runs the BlackJack game (including )
  * @Author Vincent Yuan
  * @Date 2021/10/14 21:14
  */
@@ -25,11 +25,18 @@ public class BJRunner extends Runner {
     public static final int DEALER_STOP_VALUE = 17;
 
     /**
-     * client of the BlackJack game
+     * client of BlackJack game
      */
     public BJClient bjClient;
 
+    /**
+     * dealer of BlackJack game
+     */
     public BJDealer bjDealer;
+
+    /**
+     * list of players of BlackJack game
+     */
     public ArrayList<BJPlayer> bjPlayers;
 
     public BJRunner() {
@@ -40,6 +47,11 @@ public class BJRunner extends Runner {
         round = 0;
     }
 
+    /**
+     * @Description This method runs a game
+     * @Param None
+     * @Return void
+     */
     @Override
     public void play() {
         start();
@@ -50,6 +62,11 @@ public class BJRunner extends Runner {
         }
     }
 
+    /**
+     * @Description This method is the preparation of a game
+     * @Param None
+     * @Return void
+     */
     @Override
     public void start() {
         System.out.println("Welcome to the BlackJack Game!");
@@ -57,6 +74,11 @@ public class BJRunner extends Runner {
         createPlayers();
     }
 
+    /**
+     * @Description This method creates players when the game starts.
+     * @Param None
+     * @Return void
+     */
     @Override
     public void createPlayers() {
         // add the players
@@ -71,6 +93,11 @@ public class BJRunner extends Runner {
         }
     }
 
+    /**
+     * @Description This method shows the final result including balance of each player.
+     * @Param None
+     * @Return void
+     */
     @Override
     public void showBalance() {
         System.out.println("\n\n---------------------------------------\nFollowing are players balances!");
@@ -80,6 +107,11 @@ public class BJRunner extends Runner {
         System.out.println();
     }
 
+    /**
+     * @Description This method represents each round of a game.
+     * @Param None
+     * @Return void
+     */
     @Override
     public boolean eachRound() {
         round += 1;
@@ -106,7 +138,9 @@ public class BJRunner extends Runner {
     }
 
     /**
-     * initiate hands of players and dealer
+     * @Description Initiate hands of players and dealer
+     * @Param None
+     * @Return void
      */
     public void initiate() {
         bjDealer.cleanHand();
@@ -116,7 +150,9 @@ public class BJRunner extends Runner {
     }
 
     /**
-     * dealer deals cards to players and himself at the very beginning of each round
+     * @Description Dealer deals cards to players and himself at the very beginning of each round
+     * @Param None
+     * @Return void
      */
     public void dealCards() {
         for (int i = 0; i < 2; i++) {
@@ -131,7 +167,13 @@ public class BJRunner extends Runner {
         }
     }
 
+    /**
+     * @Description Player turn of each round
+     * @Param None
+     * @Return void
+     */
     public void playerTurn() {
+        //each player plays in an order
         for (int i = 0; i < bjPlayers.size(); i++) {
             System.out.println("\n\n\n");
             BJPlayer player = bjPlayers.get(i);
@@ -139,24 +181,29 @@ public class BJRunner extends Runner {
             System.out.println("Following is your hand: ");
             System.out.println(player.showhands());
 
+            //player bets
             player.bet(player.getHand().get(0));
 
+            //If player can split a hand, he can split.
             playerSplit(player);
             if (player.getHand().size() > 1) {
                 System.out.println("Following are your cards in different hands: " + player.showhands());
             }
 
+            //each player plays hands in an order
             for (int j = 0; j < player.getHand().size(); j++) {
 
                 Hand curHand = player.getHand().get(j);
                 System.out.println("Following is your Hand " + j);
                 System.out.println(curHand.toString());
 
+                //check if black jack exists
                 if (curHand.getBJHandValue() == MAX_VALUE && curHand.getCard().size() == 2) {
                     System.out.println("Black Jack!!!");
                     continue;
                 }
 
+                //If not bust or stand, a player can keep playing.
                 while (!(curHand.getIsBusted() || curHand.getIsStand())) {
 
                     System.out.println("Which action do you want to take?(0:hit,1:stand,2:double up)");
@@ -169,6 +216,7 @@ public class BJRunner extends Runner {
                         choice = in.nextInt();
                     }
                     switch (choice) {
+                        //normal hit
                         case 0:
                             player.hit(bjDealer, deck, curHand);
                             System.out.println("Following is your Hand " + j);
@@ -181,9 +229,11 @@ public class BJRunner extends Runner {
                                 player.stand(curHand);
                             }
                             break;
+                        //stand
                         case 1:
                             player.stand(curHand);
                             break;
+                        //double up
                         case 2:
                             player.doubleUp(curHand);
                             player.hit(bjDealer, deck, curHand);
@@ -205,6 +255,11 @@ public class BJRunner extends Runner {
         }
     }
 
+    /**
+     * @Description player split instruction
+     * @param bjPlayer
+     * @Return void
+     */
     public void playerSplit(BJPlayer bjPlayer) {
         for (int i = 0; i < 3; i++) {
             for (int j = 0; j < bjPlayer.getHand().size(); j++) {
@@ -230,6 +285,11 @@ public class BJRunner extends Runner {
         }
     }
 
+    /**
+     * @Description Dealer turn of each round
+     * @Param None
+     * @Return void
+     */
     public void dealerTurn() {
         System.out.println("\n\n\n");
         bjDealer.getHand().getCard().get(1).setKnown(true);
@@ -249,6 +309,12 @@ public class BJRunner extends Runner {
         System.out.println(bjDealer.showhands());
     }
 
+    /**
+     * @Description At the end of each round, the runner will delete players who do not have enough balance
+     *              and ask others if they are willing to continue.
+     * @Param None
+     * @Return void
+     */
     public void deletePlayersToPrepareForNextRound() {
         for (int i = 0; i < bjPlayers.size(); i++) {
             BJPlayer player = bjPlayers.get(i);
