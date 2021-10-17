@@ -92,21 +92,25 @@ run `java Main` .
 * For BlackJack Game, we design that those who have 0 or negative balance cannot enter next round
   and for those who still have enough balance, we will ask them if they are willing to continue.
 
-### 3. Team work
+### 3. Suit visualization
+
+* We realize the visualization of suits which will optimize the user experience.
+
+### 4. Team work
 
 * We use Git for team work and use **GitHub Flow** as our work flow.
 
-### 4. Scalability and extendibility
+### 5. Scalability and extendibility
 
 * The design of this project uses some abstract classes to provide the possibility of scalability and extendibility.
   * e.g. We use abstract class Player to represent a abstract conception of the player and use BJPlayer and TEPlayer to implement specific players in defferentr games.
 
-### 5. Input Validation checking
+### 6. Input Validation checking
 
 * We will check when the player is playing (We assumes the user input is in good faith).
 * We may improve validation checking for bad input if necessary.
 
-### 6. Code standard
+### 7. Code standard
 
 * We use Alibaba Java Coding Guidelines in this project.
   * ClassName in UpperCamelCase; methodName, parameterName in lowerCamelCase.
